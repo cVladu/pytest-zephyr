@@ -40,8 +40,7 @@ def test_zephyr_update_testcase_objective_change(pytester, mock_zephyr, mocker):
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -49,10 +48,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective Updated",
@@ -65,8 +62,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -130,8 +126,7 @@ def test_zephyr_update_testcase_objective_remove(pytester, mock_zephyr, mocker):
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -139,10 +134,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(precondition="Test Precondition",
@@ -154,8 +147,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -219,8 +211,7 @@ def test_zephyr_update_testcase_objective_add(pytester, mock_zephyr, mocker):
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -228,10 +219,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective Added",
@@ -244,8 +233,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -309,8 +297,7 @@ def test_zephyr_update_testcase_precondition_change(pytester, mock_zephyr, mocke
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -318,10 +305,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -334,8 +319,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -399,8 +383,7 @@ def test_zephyr_update_testcase_precondition_remove(pytester, mock_zephyr, mocke
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -408,10 +391,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test objective",
@@ -423,8 +404,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -488,8 +468,7 @@ def test_zephyr_update_testcase_precondition_add(pytester, mock_zephyr, mocker):
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -497,10 +476,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -513,8 +490,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -578,8 +554,7 @@ def test_zephyr_update_testcase_estimatedtime_change(pytester, mock_zephyr, mock
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -587,10 +562,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -603,8 +576,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -668,8 +640,7 @@ def test_zephyr_update_testcase_estimatedtime_remove(pytester, mock_zephyr, mock
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -677,10 +648,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test objective",
@@ -692,8 +661,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -757,8 +725,7 @@ def test_zephyr_update_testcase_estimatedtime_add(pytester, mock_zephyr, mocker)
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -766,10 +733,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -782,8 +747,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -847,8 +811,7 @@ def test_zephyr_update_testcase_ownerid_change(pytester, mock_zephyr, mocker):
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -856,10 +819,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -872,8 +833,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -937,8 +897,7 @@ def test_zephyr_update_testcase_ownerid_remove(pytester, mock_zephyr, mocker):
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -946,10 +905,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test objective",
@@ -961,8 +918,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1025,8 +981,7 @@ def test_zephyr_update_testcase_ownerid_add(pytester, mock_zephyr, mocker):
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1034,10 +989,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -1050,8 +1003,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1129,8 +1081,7 @@ def test_zephyr_update_testcase_priority_change(
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1138,10 +1089,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        f"""
+""")
+    pytester.makepyfile(f"""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -1156,8 +1105,7 @@ zephyr_strict = True
                                                          }})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1227,8 +1175,7 @@ def test_zephyr_update_testcase_priority_remove(
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1236,10 +1183,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test objective",
@@ -1251,8 +1196,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1321,8 +1265,7 @@ def test_zephyr_update_testcase_priority_add(
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1330,10 +1273,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        f"""
+""")
+    pytester.makepyfile(f"""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -1348,8 +1289,7 @@ zephyr_strict = True
                                                          }})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1427,8 +1367,7 @@ def test_zephyr_update_testcase_status_change(
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1436,10 +1375,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        f"""
+""")
+    pytester.makepyfile(f"""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -1454,8 +1391,7 @@ zephyr_strict = True
                                                          }})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1525,8 +1461,7 @@ def test_zephyr_update_testcase_status_remove(
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1534,10 +1469,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test objective",
@@ -1549,8 +1482,7 @@ zephyr_strict = True
                                                      customFields={"custom_field": "custom_value"})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1619,8 +1551,7 @@ def test_zephyr_update_testcase_status_add(
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1628,10 +1559,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        f"""
+""")
+    pytester.makepyfile(f"""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -1646,8 +1575,7 @@ zephyr_strict = True
                                                          }})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
@@ -1715,8 +1643,7 @@ def test_zephyr_update_testcase_labels_change(
             }
         ],
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -1724,10 +1651,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        f"""
+""")
+    pytester.makepyfile(f"""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(objective="Test Objective",
@@ -1742,8 +1667,7 @@ zephyr_strict = True
                                                          }})
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     assert mocked_api.test_cases.create_test_case.call_count == 0
