@@ -19,7 +19,6 @@ from ._zephyr_interface import (
     TEST_CASE_FOLDER_TYPE,
 )
 
-
 _default_report_mapping = {
     "passed": "Pass",
     "failed": "Fail",

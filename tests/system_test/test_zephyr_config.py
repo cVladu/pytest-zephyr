@@ -4,12 +4,10 @@
 def test_zephyr_without_project_key(pytester, config_tokens):
     """Test that the plugin raises an error when no project key is provided"""
 
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         def test_sth():
             assert True
-    """
-    )
+    """)
 
     result = pytester.runpytest("--zephyr")
 
@@ -27,18 +25,14 @@ def test_zephyr_without_project_key(pytester, config_tokens):
 def test_zephyr_without_auth_token(pytester, config_tokens):
     """Test that the plugin raises an error when no auth token is provided"""
     project_key = config_tokens["project_key"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
                          [pytest]
                          zephyr_project_key = {project_key}
-                         """
-    )
-    pytester.makepyfile(
-        """
+                         """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stderr.fnmatch_lines(
         "*zephyr: The following mandatory params not found in pytest ini file or sys env vars:"
@@ -54,19 +48,15 @@ def test_zephyr_without_jira_base_url(pytester, config_tokens):
     """Test that the plugin does not raise an error when all required fields are provided"""
     project_key = config_tokens["project_key"]
     auth_token = config_tokens["auth_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
                          [pytest]
                          zephyr_project_key = {project_key}
                          zephyr_auth_token = {auth_token}
-                         """
-    )
-    pytester.makepyfile(
-        """
+                         """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stderr.fnmatch_lines(
         "*zephyr: The following mandatory params not found in pytest ini file or sys env vars:"
@@ -82,20 +72,16 @@ def test_zephyr_without_jira_username(pytester, config_tokens):
     project_key = config_tokens["project_key"]
     auth_token = config_tokens["auth_token"]
     jira_base_url = config_tokens["jira_base_url"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
                          [pytest]
                          zephyr_project_key = {project_key}
                          zephyr_auth_token = {auth_token}
                          zephyr_jira_base_url = {jira_base_url}
-                         """
-    )
-    pytester.makepyfile(
-        """
+                         """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stderr.fnmatch_lines(
         "*zephyr: The following mandatory params not found in pytest ini file or sys env vars:"
@@ -111,21 +97,17 @@ def test_zephyr_without_jira_token(pytester, config_tokens):
     auth_token = config_tokens["auth_token"]
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
                          [pytest]
                          zephyr_project_key = {project_key}
                          zephyr_auth_token = {auth_token}
                          zephyr_jira_base_url = {jira_base_url}
                          zephyr_jira_email = {jira_email}
-                         """
-    )
-    pytester.makepyfile(
-        """
+                         """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stderr.fnmatch_lines(
         "*zephyr: The following mandatory params not found in pytest ini file or sys env vars:"
@@ -142,22 +124,18 @@ def test_zephyr_strict_default_false_unk_project_key(pytester, config_tokens):
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
     jira_token = config_tokens["jira_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
             [pytest]
             zephyr_project_key = UNK
             zephyr_auth_token = {auth_token}
             zephyr_jira_base_url = {jira_base_url}
             zephyr_jira_email = {jira_email}
             zephyr_jira_token = {jira_token}
-            """
-    )
-    pytester.makepyfile(
-        """
+            """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stdout.fnmatch_lines("*PytestConfigWarning: Could not connect to Zephyr*")
     assert result.ret == 0
@@ -171,22 +149,18 @@ def test_zephyr_strict_default_false_unk_auth_token(pytester, config_tokens):
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
     jira_token = config_tokens["jira_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
             [pytest]
             zephyr_project_key = {project_key}
             zephyr_auth_token = UNK
             zephyr_jira_base_url = {jira_base_url}
             zephyr_jira_email = {jira_email}
             zephyr_jira_token = {jira_token}
-            """
-    )
-    pytester.makepyfile(
-        """
+            """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stdout.fnmatch_lines("*PytestConfigWarning: Could not connect to Zephyr*")
     assert result.ret == 0
@@ -201,8 +175,7 @@ def test_zephyr_strict_false_unk_project_key(pytester, config_tokens):
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
     jira_token = config_tokens["jira_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
             [pytest]
             zephyr_project_key = UNK
             zephyr_auth_token = {auth_token}
@@ -210,14 +183,11 @@ def test_zephyr_strict_false_unk_project_key(pytester, config_tokens):
             zephyr_jira_email = {jira_email}
             zephyr_jira_token = {jira_token}
             zephyr_strict = False
-            """
-    )
-    pytester.makepyfile(
-        """
+            """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stdout.fnmatch_lines("*PytestConfigWarning: Could not connect to Zephyr*")
     assert result.ret == 0
@@ -232,8 +202,7 @@ def test_zephyr_strict_false_unk_auth_token(pytester, config_tokens):
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
     jira_token = config_tokens["jira_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
             [pytest]
             zephyr_project_key = {project_key}
             zephyr_auth_token = UNK
@@ -241,14 +210,11 @@ def test_zephyr_strict_false_unk_auth_token(pytester, config_tokens):
             zephyr_jira_email = {jira_email}
             zephyr_jira_token = {jira_token}
             zephyr_strict = False
-            """
-    )
-    pytester.makepyfile(
-        """
+            """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stdout.fnmatch_lines("*PytestConfigWarning: Could not connect to Zephyr*")
     assert result.ret == 0
@@ -263,8 +229,7 @@ def test_zephyr_strict_true_unk_project_key(pytester, config_tokens):
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
     jira_token = config_tokens["jira_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
             [pytest]
             zephyr_project_key = UNK
             zephyr_auth_token = {auth_token}
@@ -272,14 +237,11 @@ def test_zephyr_strict_true_unk_project_key(pytester, config_tokens):
             zephyr_jira_email = {jira_email}
             zephyr_jira_token = {jira_token}
             zephyr_strict = True
-            """
-    )
-    pytester.makepyfile(
-        """
+            """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stderr.fnmatch_lines("*zephyr: Could not connect to Zephyr*")
     assert result.ret != 0
@@ -294,8 +256,7 @@ def test_zephyr_strict_true_unk_auth_token(pytester, config_tokens):
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
     jira_token = config_tokens["jira_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
             [pytest]
             zephyr_project_key = {project_key}
             zephyr_auth_token = UNK
@@ -303,14 +264,11 @@ def test_zephyr_strict_true_unk_auth_token(pytester, config_tokens):
             zephyr_jira_email = {jira_email}
             zephyr_jira_token = {jira_token}
             zephyr_strict = True
-            """
-    )
-    pytester.makepyfile(
-        """
+            """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     result.stderr.fnmatch_lines("*zephyr: Could not connect to Zephyr*")
     assert result.ret != 0
@@ -324,21 +282,17 @@ def test_zephyr_all_required_fields(pytester, config_tokens):
     jira_base_url = config_tokens["jira_base_url"]
     jira_email = config_tokens["jira_email"]
     jira_token = config_tokens["jira_token"]
-    pytester.makeini(
-        f"""
+    pytester.makeini(f"""
                          [pytest]
                          zephyr_project_key = {project_key}
                          zephyr_auth_token = {auth_token}
                          zephyr_jira_base_url = {jira_base_url}
                          zephyr_jira_email = {jira_email}
                          zephyr_jira_token = {jira_token}
-                         """
-    )
-    pytester.makepyfile(
-        """
+                         """)
+    pytester.makepyfile("""
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
