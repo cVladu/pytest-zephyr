@@ -12,8 +12,7 @@ def test_zephyr_create_test_cycle_default(pytester, mock_zephyr):
     Check that the plugin creates the test cycle with default parameters
     """
     mocked_api = mock_zephyr
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -21,17 +20,14 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -48,8 +44,7 @@ def test_zephyr_create_test_cycle_no_publish(pytester, mock_zephyr):
     Check that the plugin does NOT create the test cycle when given the no publish option is given
     """
     mocked_api = mock_zephyr
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -57,17 +52,14 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr", "--zephyr-no-publish")
     assert result.ret == 0
     assert mocked_api.executions.create_test_cycle.call_count == 0
@@ -82,8 +74,7 @@ def test_zephyr_create_test_cycle_given_name(pytester, mock_zephyr):
     Check that the plugin creates the test cycle with given name
     """
     mocked_api = mock_zephyr
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -92,17 +83,14 @@ zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
 zephyr_testcycle_name = Given Name
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -119,8 +107,7 @@ def test_zephyr_create_test_cycle_given_description(pytester, mock_zephyr):
     Check that the plugin creates the test cycle with given description
     """
     mocked_api = mock_zephyr
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -129,17 +116,14 @@ zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
 zephyr_testcycle_description = Given Description
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -159,8 +143,7 @@ def test_zephyr_create_test_cycle_given_name_and_description(pytester, mock_zeph
     Check that the plugin creates the test cycle with given name and description
     """
     mocked_api = mock_zephyr
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -170,17 +153,14 @@ zephyr_jira_token = TOKEN
 zephyr_strict = True
 zephyr_testcycle_name = Given Name 2
 zephyr_testcycle_description = Given Description 2
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -200,8 +180,7 @@ def test_zephyr_create_test_cycle_owner_id(pytester, mock_zephyr):
     Check that the plugin creates the test cycle with given owner id
     """
     mocked_api = mock_zephyr
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -209,17 +188,14 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr", "--zephyr-owner-id=given_owner_id")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -240,8 +216,7 @@ def test_zephyr_create_test_cycle_given_name_os_environ(
     """
     mocked_api = mock_zephyr
     monkeypatch.setenv("ZEPHYR_TESTCYCLE_NAME", "Environ Name")
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -250,17 +225,14 @@ zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
 zephyr_testcycle_name = Config Name
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -281,8 +253,7 @@ def test_zephyr_create_test_cycle_given_description_os_environ(
     """
     mocked_api = mock_zephyr
     monkeypatch.setenv("ZEPHYR_TESTCYCLE_DESCRIPTION", "Environ Description")
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -291,17 +262,14 @@ zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
 zephyr_testcycle_description = Given Description
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -326,8 +294,7 @@ def test_zephyr_create_test_cycle_given_name_and_description_os_environ(
     mocked_api = mock_zephyr
     monkeypatch.setenv("ZEPHYR_TESTCYCLE_NAME", "Environ Name 1")
     monkeypatch.setenv("ZEPHYR_TESTCYCLE_DESCRIPTION", "Environ Description 1")
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -337,17 +304,14 @@ zephyr_jira_token = TOKEN
 zephyr_strict = True
 zephyr_testcycle_name = Given Name 2
 zephyr_testcycle_description = Given Description 2
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -370,8 +334,7 @@ def test_zephyr_create_test_cycle_owner_id_os_environ(
     """
     mocked_api = mock_zephyr
     monkeypatch.setenv("ZEPHYR_OWNER_ID", "owner-os-environ")
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -379,17 +342,14 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
@@ -410,8 +370,7 @@ def test_zephyr_create_test_cycle_owner_id_os_environ_and_option(
     """
     mocked_api = mock_zephyr
     monkeypatch.setenv("ZEPHYR_OWNER_ID", "owner-os-environ")
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -419,17 +378,14 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr", "--zephyr-owner-id=owner-option")
     assert result.ret == 0
     mocked_api.executions.create_test_cycle.assert_called_once_with(
