@@ -11,8 +11,7 @@ def test_zephyr_create_teststeps_default_no_docstring(pytester, mock_zephyr, moc
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -20,17 +19,14 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -48,8 +44,7 @@ def test_zephyr_create_teststeps_default_docstring(pytester, mock_zephyr, mocker
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -57,18 +52,15 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
                         def test_sth():
                             \"\"\"Test steps in the docstring\"\"\"
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -89,8 +81,7 @@ def test_zephyr_create_teststeps_default_docstring_new_line(
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -98,10 +89,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase
@@ -111,8 +100,7 @@ zephyr_strict = True
                             Third line
                             \"\"\"
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -133,8 +121,7 @@ def test_zephyr_create_teststeps_specified_no_docstring(pytester, mock_zephyr, m
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -142,17 +129,14 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(test_steps="doc")
                         def test_sth():
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -171,8 +155,7 @@ def test_zephyr_create_teststeps_specified_docstring(pytester, mock_zephyr, mock
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -180,18 +163,15 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(test_steps="doc")
                         def test_sth():
                             \"\"\"Test steps in the docstring\"\"\"
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -212,8 +192,7 @@ def test_zephyr_create_teststeps_specified_docstring_new_line(
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -221,10 +200,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(test_steps="doc")
@@ -234,8 +211,7 @@ zephyr_strict = True
                             Third line
                             \"\"\"
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -255,8 +231,7 @@ def test_zephyr_create_teststeps_given(pytester, mock_zephyr, mocker):
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -264,10 +239,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(test_steps="Given steps through kwarg")  # noqa: E501
@@ -276,8 +249,7 @@ zephyr_strict = True
                             This shall be ignored
                             \"\"\"
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -297,8 +269,7 @@ def test_zephyr_create_teststeps_given_new_line(pytester, mock_zephyr, mocker):
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -306,10 +277,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(test_steps="First line\\nSecond line\\nThird line")  # noqa: E501
@@ -318,8 +287,7 @@ zephyr_strict = True
                             This shall be ignored
                             \"\"\"
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_script.assert_called_once_with(
@@ -339,8 +307,7 @@ def test_zephyr_create_teststeps_given_test_steps(pytester, mock_zephyr, mocker)
         "zephyr.scale.cloud.endpoints.test_cases.TestCaseEndpoints.create_test_case",
         return_value={"id": 200, "key": "ANY-T200"},
     )
-    pytester.makeini(
-        """
+    pytester.makeini("""
 [pytest]
 zephyr_project_key = ANY
 zephyr_auth_token = KNWON
@@ -348,10 +315,8 @@ zephyr_jira_base_url = example.com
 zephyr_jira_email = user@mail.com
 zephyr_jira_token = TOKEN
 zephyr_strict = True
-"""
-    )
-    pytester.makepyfile(
-        """
+""")
+    pytester.makepyfile("""
                         import pytest
 
                         @pytest.mark.zephyr_testcase(test_steps=[
@@ -362,8 +327,7 @@ zephyr_strict = True
                             This shall be ignored
                             \"\"\"
                             assert True
-                        """
-    )
+                        """)
     result = pytester.runpytest("--zephyr")
     assert result.ret == 0
     mocked_api.test_cases.create_test_steps.assert_called_once_with(
